@@ -1,9 +1,9 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import HomeWrapper from "./components/HomeWrapper.vue";
 </script>
 
 <template>
   <div>
-    <HelloWorld />
+    <HomeWrapper />
   </div>
 </template>
