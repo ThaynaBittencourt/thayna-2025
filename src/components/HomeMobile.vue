@@ -43,7 +43,8 @@ const toggleLogo = (index) => {
 
 <template>
   <div>
-    <div class="card top- right-5 z-50">
+    <div class="container">
+    <div class="card z-50">
       <a
         href="https://www.instagram.com/negrescooficial/"
         class="socialContainer containerOne"
@@ -93,7 +94,7 @@ const toggleLogo = (index) => {
         alt="Background"
       />
     </div>
-
+      </div>
     <!-- Grid responsivo -->
     <div class="relative w-full h-full">
       <!-- Imagem de fundo -->
@@ -296,6 +297,15 @@ const toggleLogo = (index) => {
   filter: grayscale(0%);
 }
 /* From Uiverse.io by vinodjangid07 */
+.container {
+  width: 100vw;
+  height: 58rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Centraliza verticalmente */
+}
+
 .card {
   width: fit-content;
   height: fit-content;
@@ -305,10 +315,10 @@ const toggleLogo = (index) => {
   opacity: 80%;
   gap: 5px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
-  margin-left: 100px;
-  margin-top: 70px;
-  margin-bottom: 0px;
+  /* Remover margens que atrapalham a centralização */
+  margin: 0;
 }
+
 
 /* for all social containers*/
 .socialContainer {
