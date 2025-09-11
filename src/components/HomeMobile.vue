@@ -299,7 +299,7 @@ const toggleLogo = (index) => {
 /* From Uiverse.io by vinodjangid07 */
 .container {
   width: 100vw;
-  height: 44rem;
+  height: 46rem;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centraliza horizontalmente */
