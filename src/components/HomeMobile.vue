@@ -42,8 +42,6 @@ const toggleLogo = (index) => {
   logo.active = logo.clicked;
 };
 
-
-
 // Reviews data
 const reviews = [
   {
@@ -144,6 +142,7 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
           src="../assets/img/pageBranco.png"
           class="absolute inset-0 w-full h-full object-cover -z-10"
           alt="Background"
+          style="height: 65rem"
         />
       </div>
     </div>
@@ -234,6 +233,7 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
         src="../assets/img/pageBranco.png"
         class="absolute inset-0 w-full h-full object-cover -z-10"
         alt="Background"
+        style="margin-top: -9rem"
       />
 
       <!-- Conteúdo por cima da imagem -->
@@ -251,52 +251,36 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
           <div class="flex flex-col gap-3 items-center">
             <img
               src="../assets/img/detranPb.png"
-              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md shadow-2xl"
+              class="w-90 bg-shadow transition-transform duration-300 hover:scale-110 rounded-md"
             />
-            <span
-              class="mt-3 text-lg font-semibold text-white bg-[#30b28d] px-10 py-1 rounded-lg shadow-lg"
-            >
-              DETRAN-PB
-            </span>
+            <button>DETRAN-PB</button>
           </div>
 
           <!-- item 2 -->
           <div class="flex flex-col gap-3 items-center">
             <img
               src="../assets/img/postomais.png"
-              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md shadow-2xl"
+              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md bg-shadow"
             />
-            <span
-              class="mt-3 text-lg font-semibold text-white bg-[#30b28d] px-10 py-1 rounded-lg shadow-lg"
-            >
-              POSTO+
-            </span>
+            <button>POSTO+</button>
           </div>
 
           <!-- item 3 -->
           <div class="flex flex-col gap-3 items-center">
             <img
               src="../assets/img/idema.png"
-              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md shadow-2xl"
+              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md bg-shadow"
             />
-            <span
-              class="mt-3 text-lg font-semibold text-white bg-[#30b28d] px-10 py-1 rounded-lg shadow-lg"
-            >
-              IDEMA
-            </span>
+            <button>IDEMA</button>
           </div>
 
           <!-- item 4 -->
           <div class="flex flex-col gap-3 items-center">
             <img
               src="../assets/img/sansil2.png"
-              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md shadow-2xl"
+              class="w-90 transition-transform duration-300 hover:scale-110 rounded-md bg-shadow"
             />
-            <span
-              class="mt-3 text-lg font-semibold text-white bg-[#30b28d] px-10 py-1 rounded-lg shadow-lg"
-            >
-              SANSIL
-            </span>
+            <button>SANSIL</button>
           </div>
         </div>
       </div>
@@ -307,15 +291,21 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
         src="../assets/img/pageBranco.png"
         class="absolute inset-0 w-full h-full object-cover -z-10"
         alt="Background"
+        style="margin-top: -9rem"
       />
 
       <!-- Conteúdo por cima da imagem -->
-      <div
+      <!-- <div
         class="absolute inset-0 flex flex-col items-center justify-center"
-      ></div>
+      ></div> -->
     </div>
-    
-    <div class="relative w-screen h-screen">
+
+    <div class="relative w-screen h-50">
+      <img
+        src="../assets/img/pageBranco.png"
+        class="absolute inset-0 w-full h-full object-cover -z-10"
+        alt="Background"
+      />
       <img
         src="../assets/img/pageBranco.png"
         class="absolute inset-0 w-full h-full object-cover -z-10"
@@ -323,9 +313,12 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
       />
 
       <!-- Conteúdo por cima da imagem -->
-      <div class="absolute inset-0 flex flex-col items-center justify-center">
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center"
+        style="margin-top: -10rem"
+      >
         <div
-          class="relative flex w-full flex-col items-center justify-center overflow-hidden "
+          class="relative flex w-full flex-col items-center justify-center overflow-hidden"
         >
           <!-- First Marquee -->
           <Marquee pause-on-hover class="[--duration:20s]">
@@ -353,12 +346,12 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
 
           <!-- Left Gradient -->
           <div
-            class="pointer-events-none absolute inset-y-0 left-0 w-1/3  dark:from-background"
+            class="pointer-events-none absolute inset-y-0 left-0 w-1/3 dark:from-background"
           ></div>
 
           <!-- Right Gradient -->
           <div
-            class="pointer-events-none absolute inset-y-0 right-0 w-1/3  dark:from-background"
+            class="pointer-events-none absolute inset-y-0 right-0 w-1/3 dark:from-background"
           ></div>
         </div>
       </div>
@@ -368,6 +361,47 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
 
 <style scoped>
 /* Estilo padrão (mobile first) */
+
+/* 
+    TESTE
+*/
+button {
+  --bg: #30b28d;
+  --text-color: #fff;
+  position: relative;
+  width: 350px;
+  border: none;
+  background: var(--bg);
+  color: var(--text-color);
+  padding: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.2s;
+  border-radius: 5px;
+  opacity: 0.8;
+  letter-spacing: 1px;
+  box-shadow: #228065 0px 7px 2px, #000 0px 8px 5px;
+  margin-top: 15px;
+}
+
+button:hover {
+  opacity: 1;
+}
+
+button:active {
+  top: 4px;
+  box-shadow: #228065 0px 3px 2px, #000 0px 3px 5px;
+}
+/* 
+    TESTE
+*/
+
+.bg-shadow {
+  border-radius: 20px;
+
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+
 .img-mobile {
   width: 100%;
   margin-left: 0px;
@@ -389,7 +423,7 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
 /* From Uiverse.io by vinodjangid07 */
 .container {
   width: 100vw;
-  height: 46rem;
+  height: 63rem;
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centraliza horizontalmente */
@@ -401,6 +435,8 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
   height: 46rem;
   display: flex;
   justify-content: center;
+  margin-top: -20rem;
+  margin-bottom: 8rem;
 }
 
 .card {
@@ -414,6 +450,7 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
   /* Remover margens que atrapalham a centralização */
   margin: 0;
+  margin-top: -16rem;
 }
 
 /* for all social containers*/
