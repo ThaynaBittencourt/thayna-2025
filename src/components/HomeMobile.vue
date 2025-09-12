@@ -310,6 +310,7 @@ const secondRow = ref(reviews.slice(reviews.length / 2));
         src="../assets/img/pageBranco.png"
         class="absolute inset-0 w-full h-full object-cover -z-10"
         alt="Background"
+        style="margin-top: -10rem"
       />
 
       <!-- Conteúdo por cima da imagem -->
