@@ -1,294 +1,388 @@
+<!-- eslint-disable vue/block-lang -->
 <script setup>
-import { ref } from "vue";
-import imgXp from "./imgXp.vue";
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowUpRight } from 'lucide-vue-next';
+import { onMounted, onUnmounted, ref, nextTick } from 'vue';
 
-defineProps({
-  msg: String,
+gsap.registerPlugin(ScrollTrigger);
+
+// Refs de estado
+const percentage = ref(0);
+const isLoading = ref(true);
+
+const projects = [
+    {
+        title: 'INTEGRAÇÃO COM IA',
+        category: 'Inteligência Artificial',
+        image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+        title: 'TESTE',
+        category: 'Workflow',
+        image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
+    },
+    {
+        title: 'Meus projetos',
+        category: 'vamos criar juntos?',
+        image: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
+    },
+];
+
+onMounted(() => {
+    const tlLoader = gsap.timeline({
+        defaults: { ease: 'power2.inOut' },
+    });
+
+    const counter = { value: 0 };
+
+    // 1. Sequência do Loader
+    tlLoader
+        .to(counter, {
+            value: 100,
+            duration: 2,
+            onUpdate: () => {
+                percentage.value = Math.floor(counter.value);
+            },
+        })
+        .to('.loader-container', {
+            yPercent: -100,
+            duration: 1.2,
+            delay: 0.2,
+        })
+        .add(() => {
+            // Remove o estado de loading e limpa triggers fantasmas
+            isLoading.value = false;
+            ScrollTrigger.getAll().forEach((t) => t.kill());
+
+            // Aguarda o Vue atualizar o DOM após remover o loader
+            nextTick().then(() => {
+                iniciarAnimacoesPrincipais();
+            });
+        });
 });
 
-const count = ref(0);
+function iniciarAnimacoesPrincipais() {
+    // Revelação do Header
+    gsap.to('.reveal-header', {
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        skewY: 0,
+        duration: 1.5,
+        ease: 'power4.out',
+    });
+
+    // Revelação das Imagens (Clip Path)
+    gsap.to('.image-reveal', {
+        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+        stagger: 0.2,
+        duration: 1.5,
+        ease: 'expo.out',
+    });
+
+    // --- CONFIGURAÇÃO DO SCROLL HORIZONTAL ---
+    const slider = document.querySelector('.div-horizontal');
+    const sections = gsap.utils.toArray('.secao-horizontal');
+
+    if (slider) {
+        const sliderTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: slider,
+                pin: true,
+                scrub: 1,
+                snap: 1 / (sections.length - 1),
+                start: 'top top',
+                end: () => '+=' + (slider.scrollWidth - window.innerWidth),
+                invalidateOnRefresh: true,
+            },
+        });
+
+        sliderTl.to(sections, {
+            xPercent: -100 * (sections.length - 1),
+            ease: 'none',
+        });
+    }
+
+    // Parallax das imagens
+    gsap.utils.toArray('.parallax-img').forEach((img) => {
+        gsap.to(img, {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: img,
+                scrub: true,
+            },
+        });
+    });
+
+    // Efeito de flutuação contínuo (loop)
+    gsap.to('.login-bounce', {
+        y: '-=15',
+        duration: 2.5,
+        ease: 'power1.inOut',
+        yoyo: true,
+        repeat: -1,
+    });
+
+    ScrollTrigger.refresh();
+}
+
+onUnmounted(() => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+});
 </script>
 
 <template>
-  <div>
-    <img src="../assets/img/page5.png" class="w-screen h-screen object-cover" />
-    <!-- Imagem que ocupa toda a tela -->
-    <img
-      src="../assets/img/pageBranco.png"
-      class="w-screen h-screen object-cover"
-    />
-    <imgXp class="teste5" />
-
-    <!-- Segunda imagem (opcional) -->
-    <img
-      src="../assets/img/pageBranco.png"
-      class="fixed top-0 left-0 w-screen h-screen object-cover -z-10"
-    />
-  </div>
-  <h1>{{ msg }}</h1>
-
-  <!-- rede sociais -->
-  <div class="card fixed top-5 right-5 z-50">
-    <a
-      href="https://www.instagram.com/negrescooficial/"
-      class="socialContainer containerOne"
+    <div
+        class="noise-container min-h-screen bg-[#F9F9F7] text-black selection:bg-black selection:text-white"
     >
-      <svg class="socialSvg instagramSvg" viewBox="0 0 16 16">
-        <path
-          d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
-        ></path>
-      </svg>
-    </a>
+        <section
+            class="relative flex min-h-screen items-center overflow-hidden px-8 lg:px-20"
+        >
+            <div class="max-w-[1400px]">
+                <div
+                    class="grid w-full max-w-[1600px] grid-cols-1 items-center gap-16 lg:grid-cols-2"
+                >
+                    <div class="z-10 order-2 lg:order-1">
+                        <div class="mb-4 overflow-hidden">
+                            <span
+                                class="reveal-text inline-block translate-y-full text-xs font-bold tracking-widest text-emerald-600 uppercase"
+                            >
+                                Based in Natal, RN / Full Stack Developer
+                            </span>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <div>
+                                <h1
+                                    class="reveal-header font-ubermove-bold translate-y-[100px] skew-y-4 text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw]"
+                                >
+                                    Thaynã <br />
+                                    <span class="text-[6vw] text-gray-400"
+                                        >Bittencourt</span
+                                    >
+                                </h1>
+                            </div>
+                            <div>
+                                <p
+                                    class="font-ubermove mt-6 max-w-md skew-y-4 text-xl text-zinc-600"
+                                >
+                                    Desenvolvedor Full Stack especializado em
+                                    ecossistema Laravel, Vue.js e automações com
+                                    n8n.
+                                </p>
+                            </div>
+                        </div>
 
-    <a href="#" class="socialContainer containerTwo">
-      <svg class="socialSvg twitterSvg" viewBox="0 0 16 16">
-        <path
-          d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-        ></path>
-      </svg>
-    </a>
+                        <div class="reveal-text mt-10 flex space-x-6 opacity-0">
+                            <Github
+                                class="h-5 w-5 cursor-pointer transition-colors hover:text-emerald-600"
+                            />
+                            <Linkedin
+                                class="h-5 w-5 cursor-pointer transition-colors hover:text-emerald-600"
+                            />
+                            <Mail
+                                class="h-5 w-5 cursor-pointer transition-colors hover:text-emerald-600"
+                            />
+                        </div>
+                    </div>
 
-    <a
-      href="https://www.linkedin.com/in/thayn%C3%A3-bittencourt-470571274/"
-      class="socialContainer containerThree"
-    >
-      <svg class="socialSvg linkdinSvg" viewBox="0 0 448 512">
-        <path
-          d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"
-        ></path>
-      </svg>
-    </a>
+                    <div class="relative order-1 lg:order-2">
+                        <div
+                            class="hero-img-wrapper aspect-4/5 overflow-hidden rounded-2xl bg-zinc-200 lg:aspect-square"
+                        >
+                            <img
+                                src="/img/eu preto e branco.jpeg"
+                                alt="Thaynã"
+                                class="hero-img h-full w-full scale-110 object-cover object-[center_38%] grayscale"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <a
-      href="https://wa.me/5584996839198?text=Ol%C3%A1,%20pode%20me%20ajudar?"
-      class="socialContainer containerFour"
-    >
-      <svg class="socialSvg whatsappSvg" viewBox="0 0 16 16">
-        <path
-          d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
-        ></path>
-      </svg>
-    </a>
-  </div>
+        <section
+            class="div-horizontal flex h-screen w-[300vw] flex-nowrap overflow-x-hidden bg-black text-white"
+        >
+            <div
+                class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10"
+            >
+                <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+                    Agilidade
+                </h1>
+            </div>
+            <div
+                class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10 bg-emerald-950"
+            >
+                <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+                    Modernidade
+                </h1>
+            </div>
+            <div
+                class="secao-horizontal flex h-full w-screen items-center justify-center bg-zinc-900"
+            >
+                <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+                    Inovação
+                </h1>
+            </div>
+        </section>
 
-  <div
-    class="absolute top-215 left-1/2 transform -translate-x-1/2 z-20"
-    style="display: flex; flex-direction: column; align-items: center"
-  >
-    <img
-      src="../assets/img/quemsoueu.png
-    "
-      class="w-130 mt-5 mb-10"
-    />
-    <div style="margin-top: 45px" class="w-250 teste4">
-      <p class="text-[#26765f] text-md font-bold">
-        Thaynã Bittencourt – Dev Junior Full-Stack & Designer, Atualmente atuo
-        como desenvolvedora júnior no Governo do Estado do Rio Grande do Norte e
-        também presto serviços para a empresa privada Inscode.
-      </p>
-      <p class="text-[#26765f] text-md font-bold teste">
-        Minha especialização é em desenvolvimento Full-Stack, trabalhando com
-        diversas bibliotecas, frameworks e ferramentas modernas. Tenho
-        experiência sólida em Front-End: HTML, CSS, JavaScript, Vue.js,
-        Tailwind, Bootstrap, Bulma, e em Back-End: PHP com Laravel, integração
-        com bancos de dados como MySQL e PostgreSQL, utilizando ferramentas como
-        HeidiSQL. Também aplico meus conhecimentos em automações com n8n.
-      </p>
-      <p class="text-[#26765f] text-md font-bold">
-        Além disso, sou designer e aplico técnicas de criação em Photoshop,
-        CorelDRAW, Figma e Canva, desenvolvendo imagens bem atrativas. Sou
-        apaixonada por unir tecnologia e design, entregando soluções completas,
-        inovadoras, responsivas e com excelente experiência para o usuário.
-      </p>
+        <section class="bg-black px-8 py-30 text-white lg:px-20">
+            <div
+                class="mb-20 flex flex-col py-15 items-end justify-between gap-8 md:flex-row"
+            >
+                <h2
+                    class="font-ubermove-bold text-5xl tracking-tighter uppercase"
+                >
+                    Selected <br />
+                    <span class="text-zinc-600">Works</span>
+                </h2>
+                <p class="max-w-xs text-sm text-zinc-400 italic">
+                    Projetos desenvolvidos com foco em performance,
+                    escalabilidade e experiência do usuário.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-20 lg:grid-cols-3">
+                <div
+                    v-for="(project, idx) in projects"
+                    :key="idx"
+                    class="group cursor-pointer"
+                >
+                    <div
+                        class="relative aspect-[3/4] overflow-hidden rounded-xl bg-zinc-900"
+                    >
+                        <img
+                            :src="project.image"
+                            class="h-full w-full object-cover opacity-50 grayscale transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
+                        />
+                        <div
+                            class="absolute top-6 right-6 rounded-full border border-white/20 bg-black/20 p-4 opacity-0 backdrop-blur-md transition-opacity group-hover:opacity-100"
+                        >
+                            <ArrowUpRight class="h-6 w-6" />
+                        </div>
+                    </div>
+                    <div class="mt-8 flex items-start justify-between">
+                        <div>
+                            <p
+                                class="mb-2 text-[10px] font-bold tracking-widest text-emerald-500 uppercase"
+                            >
+                                {{ project.category }}
+                            </p>
+                            <h3
+                                class="font-ubermove-bold text-3xl tracking-tighter"
+                            >
+                                {{ project.title }}
+                            </h3>
+                        </div>
+                        <span class="font-mono text-sm text-zinc-600">{{
+                            project.year
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="flex h-screen items-center justify-center bg-[#F9F9F7]">
+            <h2
+                class="font-ubermove text-[15vw] font-bold tracking-tighter text-black uppercase opacity-5"
+            >
+                developer
+            </h2>
+        </section>
+
+        <div
+            v-if="isLoading"
+            class="loader-container fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black text-white"
+        >
+            <div class="text-center">
+                <p
+                    class="font-ubermove mb-8 text-[10px] tracking-[0.8em] uppercase opacity-30"
+                >
+                    Loading Portfolio
+                </p>
+                <div class="relative inline-block">
+                    <span
+                        class="font-ubermove-bold text-8xl leading-none md:text-[12vw]"
+                        >{{ percentage }}%</span
+                    >
+                </div>
+            </div>
+            <div class="absolute bottom-20 h-[1px] w-40 bg-white/20">
+                <div
+                    class="h-full bg-white transition-all duration-100"
+                    :style="{ width: percentage + '%' }"
+                ></div>
+            </div>
+        </div>
     </div>
-    <img src="../assets/img/dev.png" class="w-100 teste2" />
-    <div class="grid grid-cols-5 gap-75" style="margin-top: 18px">
-      <!-- item 1 -->
-      <div class="relative w-70">
-        <img
-          src="../assets/img/detranPb.png"
-          class="w-full transition-transform duration-300 hover:scale-110 hover:z-10 rounded-md shadow-2xl teste3"
-        />
-        <span
-          class="absolute -bottom-8.5 left-1/2 -translate-x-1/2 text-md text-white bg-[#b3c07e]/90 px-1 rounded"
-        >
-          DETRAN-PB
-        </span>
-      </div>
-
-      <!-- item 2 -->
-      <div class="relative w-70">
-        <img
-          src="../assets/img/postomais.png"
-          class="w-full transition-transform duration-300 hover:scale-110 hover:z-10 rounded-md shadow-2xl teste3"
-        />
-        <span
-          class="absolute -bottom-8.5 left-1/2 -translate-x-1/2 text-md text-white bg-[#b3c07e]/90 px-1 rounded"
-        >
-          POSTO+
-        </span>
-      </div>
-
-      <!-- item 3 -->
-      <div class="relative w-70">
-        <img
-          src="../assets/img/idema.png"
-          class="w-full transition-transform duration-300 hover:scale-110 hover:z-10 rounded-md shadow-2xl teste3"
-        />
-        <span
-          class="absolute -bottom-8.5 left-1/2 -translate-x-1/2 text-md text-white bg-[#b3c07e]/90 px-1 rounded"
-        >
-          IDEMA
-        </span>
-      </div>
-
-      <!-- item 4 -->
-      <div class="relative w-70">
-        <img
-          src="../assets/img/sansil2.png"
-          class="w-full transition-transform duration-300 hover:scale-110 hover:z-10 rounded-md shadow-2xl teste3"
-        />
-        <span
-          class="absolute -bottom-8.5 left-1/2 -translate-x-1/2 text-md text-white bg-[#b3c07e]/90 px-1 rounded"
-        >
-          SANSIL
-        </span>
-      </div>
-
-      <!-- item 5 -->
-      <!-- <div class="relative w-70">
-        <img
-          src="../assets/img/detranPb.png"
-          class="w-full transition-transform duration-300 hover:scale-110 hover:z-10 teste3"
-        />
-        <span
-          class="absolute -bottom-8.5 left-1/2 -translate-x-1/2 text-md text-white bg-[#b3c07e]/90 px-1 rounded"
-        >
-          Mais um
-        </span>
-      </div> -->
-    </div>
-  </div>
 </template>
 
 <style scoped>
-.read-the-docs {
-  color: #888;
-}
-.card-fixed {
-  position: fixed; /* Fica sobre a imagem e não se move com scroll */
-  top: 50%; /* Meio vertical */
-  left: 50%; /* Meio horizontal */
-  transform: translate(-50%, -50%); /* Ajusta para o centro exato */
-
-  display: flex;
-  gap: 15px;
-  padding: 15px;
-  border-radius: 27px;
-  background-color: #26765f00; /* transparente */
-  z-index: 50; /* Fica acima das imagens */
-
-  width: fit-content;
-  height: fit-content;
+/* Reset de scroll lateral para evitar bugs no GSAP */
+:global(html, body) {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden !important;
 }
 
-/* Ajustes para mobile */
-@media (max-width: 768px) {
-  .card-fixed {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-  }
-}
-.teste {
-  margin-top: 25px;
-  margin-bottom: 25px;
-}
-.teste2 {
-  margin-top: 30px;
-}
-.teste3 {
-  margin-top: 30px;
-}
-.teste4 {
-  /* margin-top: -800px; */
-  margin-top: 10px;
-}
-.teste5 {
-  margin-top: 101px;
-  margin-bottom: 10px;
-}
-/* From Uiverse.io by vinodjangid07 */
-.card {
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 80%;
-  gap: 5px;
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+@font-face {
+    font-family: 'UberMove';
+    src: url('/fonts/UberMoveMedium.otf') format('opentype'); /* Ajuste o formato se for .otf */
+    font-weight: 400; /* Equivalente ao 'normal' */
+    font-style: normal;
+    font-display: swap;
 }
 
-/* for all social containers*/
-.socialContainer {
-  width: 42px;
-  height: 42px;
-  background-color: #26765f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition-duration: 0.3s;
-  border-radius: 10px;
-}
-/* instagram*/
-.containerOne:hover {
-  background-color: #128c7e;
-  transition-duration: 0.3s;
-}
-/* twitter*/
-.containerTwo:hover {
-  background-color: #128c7e;
-  transition-duration: 0.3s;
-}
-/* linkdin*/
-.containerThree:hover {
-  background-color: #128c7e;
-  transition-duration: 0.3s;
-}
-/* Whatsapp*/
-.containerFour:hover {
-  background-color: #128c7e;
-  transition-duration: 0.3s;
+@font-face {
+    font-family: 'UberMove';
+    src: url('/fonts/UberMoveBold.otf') format('opentype');
+    font-weight: 700; /* Equivalente ao 'bold' */
+    font-style: normal;
+    font-display: swap;
 }
 
-.socialContainer:active {
-  transform: scale(0.9);
-  transition-duration: 0.3s;
+/* Classe para o texto Normal/Medium */
+.font-ubermove {
+    font-family: 'UberMove', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
 }
 
-.socialSvg {
-  width: 17px;
+/* Classe para o texto Bold */
+.font-ubermove-bold {
+    font-family: 'UberMove', sans-serif;
+    font-weight: 700;
+    -webkit-font-smoothing: antialiased;
 }
 
-.socialSvg path {
-  fill: rgb(255, 255, 255);
+.noise-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 999;
 }
 
-.socialContainer:hover .socialSvg {
-  animation: slide-in-top 0.3s both;
+.image-reveal {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+    will-change: clip-path;
 }
 
-@keyframes slide-in-top {
-  0% {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
+.div-horizontal {
+    will-change: transform;
+}
 
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.secao-horizontal {
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
 }
 </style>
