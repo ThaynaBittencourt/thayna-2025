@@ -156,17 +156,20 @@ onUnmounted(() => {
               </span>
             </div>
             <div class="flex flex-col justify-center">
-              <div>
+              <div class="pb-10">
                 <h1
-                  class="reveal-header font-ubermove-bold translate-y-[100px] skew-y-4 text-[12vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw]"
+                  class="reveal-header font-ubermove-bold translate-y-[100px] lg:skew-y-4 skew-y-0 text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw]"
                 >
                   Thaynã <br />
-                  <span class="text-[6vw] text-gray-400">Bittencourt</span>
+                  <span
+                    class="lg:text-[6vw] text-[10vw] font-bold font-ubermove-bold text-gray-400"
+                    >Bittencourt</span
+                  >
                 </h1>
               </div>
               <div>
                 <p
-                  class="font-ubermove mt-6 max-w-md skew-y-4 text-xl text-zinc-600"
+                  class="font-ubermove mt-6 max-w-md lg:skew-y-4 skew-y-0 text-xl text-zinc-600"
                 >
                   Desenvolvedor Full Stack especializado em ecossistema Laravel,
                   Vue.js e automações com n8n.
@@ -192,9 +195,9 @@ onUnmounted(() => {
               class="hero-img-wrapper aspect-4/5 overflow-hidden rounded-2xl bg-zinc-200 lg:aspect-square"
             >
               <img
-                src="/img/eu preto e branco.jpeg"
+                src="/src/assets/img/eu preto e branco.jpeg"
                 alt="Thaynã"
-                class="hero-img h-full w-full scale-110 object-cover object-[center_38%] grayscale"
+                class="hero-img h-full w-full scale-110 object-cover lg:object-[center_38%] object-[center_35%] grayscale"
               />
             </div>
           </div>
