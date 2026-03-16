@@ -163,7 +163,7 @@ onUnmounted(() => {
             <div class="flex flex-col justify-center">
               <div class="pb-10">
                 <h1
-                  class="reveal-header font-ubermove-bold translate-y-[100px] text-amber-600 lg:skew-y-4 skew-y-0 text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw] drop-shadow-xl drop-shadow-indigo-300/20"
+                  class="reveal-header font-ubermove-bold translate-y-[100px] text-amber-600 lg:skew-y-4 skew-y-0 text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw] drop-shadow-xl drop-shadow-white/10"
                 >
                   Thaynã <br />
                   <span
