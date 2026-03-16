@@ -78,6 +78,7 @@ function iniciarAnimacoesPrincipais() {
   const slider = document.querySelector('.div-horizontal');
   const innerSlider = document.querySelector('.inner-slider');
   const sections = gsap.utils.toArray('.secao-horizontal');
+
   if (slider && innerSlider && sections.length > 0) {
     ScrollTrigger.refresh();
 
@@ -100,7 +101,6 @@ function iniciarAnimacoesPrincipais() {
       ease: 'none',
     });
   }
-
   gsap.to('.login-bounce', {
     y: '-=15',
     duration: 2.5,
@@ -190,32 +190,30 @@ onUnmounted(() => {
     </section>
 
     <!-- SCROLL HORIZONTAL -->
-    <div style="overflow: hidden; width: 100vw; max-width: 100%">
-      <div class="div-horizontal h-screen w-screen">
+    <div class="div-horizontal h-screen overflow-hidden w-screen">
+      <div
+        class="flex h-full w-[300vw] flex-nowrap bg-black text-white inner-slider"
+      >
         <div
-          class="inner-slider flex h-full w-[300vw] flex-nowrap bg-black text-white"
+          class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10"
         >
-          <div
-            class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10"
-          >
-            <h1 class="font-ubermove text-[10vw] font-bold uppercase">
-              Agilidade
-            </h1>
-          </div>
-          <div
-            class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10 bg-emerald-950"
-          >
-            <h1 class="font-ubermove text-[10vw] font-bold uppercase">
-              Modernidade
-            </h1>
-          </div>
-          <div
-            class="secao-horizontal flex h-full w-screen items-center justify-center bg-zinc-900"
-          >
-            <h1 class="font-ubermove text-[10vw] font-bold uppercase">
-              Inovação
-            </h1>
-          </div>
+          <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+            Agilidade
+          </h1>
+        </div>
+        <div
+          class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10 bg-emerald-950"
+        >
+          <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+            Modernidade
+          </h1>
+        </div>
+        <div
+          class="secao-horizontal flex h-full w-screen items-center justify-center bg-zinc-900"
+        >
+          <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+            Inovação
+          </h1>
         </div>
       </div>
     </div>
@@ -365,11 +363,6 @@ onUnmounted(() => {
 }
 
 .div-horizontal {
-  will-change: transform;
-  /* sem overflow aqui */
-}
-
-.inner-slider {
   will-change: transform;
 }
 
