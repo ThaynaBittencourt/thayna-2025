@@ -206,7 +206,7 @@ onUnmounted(() => {
     </section>
 
     <section
-      class="div-horizontal flex h-screen w-[300vw] flex-nowrap overflow-x-hidden bg-black text-white"
+      class="div-horizontal flex h-screen lg:w-[350vw] flex-nowrap overflow-x-hidden bg-black text-white"
     >
       <div
         class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10"
