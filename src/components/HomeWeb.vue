@@ -15,23 +15,28 @@ const projects = [
   {
     title: 'INTEGRAÇÃO COM IA',
     category: 'Inteligência Artificial',
+    year: '2026',
+    index: '01',
     image:
       'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
   },
   {
-    title: 'TESTE',
-    category: 'Workflow',
+    title: 'AUTOMAÇÃO',
+    category: 'Workflow / n8n',
+    year: '2026',
+    index: '02',
     image:
-      'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop',
   },
   {
     title: 'Meus projetos',
     category: 'vamos criar juntos?',
+    year: '2025',
+    index: '03',
     image:
-      'https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop',
   },
 ];
-
 onMounted(() => {
   const tlLoader = gsap.timeline({
     defaults: { ease: 'power2.inOut' },
@@ -131,6 +136,13 @@ function iniciarAnimacoesPrincipais() {
   ScrollTrigger.refresh();
 }
 
+const isMobile = ref(window.innerWidth < 1024);
+
+// dentro do onMounted, adicione:
+window.addEventListener('resize', () => {
+  isMobile.value = window.innerWidth < 1024;
+});
+
 onUnmounted(() => {
   ScrollTrigger.getAll().forEach((t) => t.kill());
 });
@@ -138,7 +150,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="noise-container min-h-screen bg-[#F9F9F7] text-black selection:bg-black selection:text-white"
+    class="noise-container min-h-screen bg-[#000000] text-black selection:bg-black selection:text-white"
   >
     <section
       class="relative flex min-h-screen items-center overflow-hidden px-8 lg:px-20"
@@ -148,21 +160,14 @@ onUnmounted(() => {
           class="grid w-full max-w-[1600px] grid-cols-1 items-center gap-16 lg:grid-cols-2"
         >
           <div class="z-10 order-2 lg:order-1">
-            <div class="mb-4 overflow-hidden">
-              <span
-                class="reveal-text inline-block translate-y-full text-xs font-bold tracking-widest text-emerald-600 uppercase"
-              >
-                Based in Natal, RN / Full Stack Developer
-              </span>
-            </div>
             <div class="flex flex-col justify-center">
               <div class="pb-10">
                 <h1
-                  class="reveal-header font-ubermove-bold translate-y-[100px] lg:skew-y-4 skew-y-0 text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw]"
+                  class="reveal-header font-ubermove-bold translate-y-[100px] text-amber-600 lg:skew-y-4 skew-y-0 text-[8vw] leading-[0.85] font-bold tracking-tighter uppercase opacity-0 lg:text-[5vw] drop-shadow-xl drop-shadow-indigo-300/20"
                 >
                   Thaynã <br />
                   <span
-                    class="lg:text-[6vw] text-[10vw] font-bold font-ubermove-bold text-gray-400"
+                    class="lg:text-[6vw] text-[10vw] font-bold font-ubermove-bold text-gray-200"
                     >Bittencourt</span
                   >
                 </h1>
@@ -174,6 +179,13 @@ onUnmounted(() => {
                   Desenvolvedor Full Stack especializado em ecossistema Laravel,
                   Vue.js e automações com n8n.
                 </p>
+                <div v-if="isMobile" class="mb-40">
+                  <span
+                    class="reveal-text inline-block translate-y-full text-xs font-bold tracking-widest text-amber-600 uppercase"
+                  >
+                    Based in Natal, RN / Full Stack Developer
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -206,32 +218,42 @@ onUnmounted(() => {
     </section>
 
     <section
-      class="div-horizontal flex h-screen lg:w-[350vw] flex-nowrap overflow-x-hidden bg-black text-white"
+      class="div-horizontal flex h-screen lg:w-[350vw] flex-nowrap overflow-x-hidden bg-white text-white"
     >
       <div
-        class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10"
+        class="secao-horizontal flex h-full w-screen items-center justify-center bg-black/97 border-r border-white/10"
       >
-        <h1 class="font-ubermove text-[10vw] font-bold uppercase">Agilidade</h1>
+        <h1
+          class="font-ubermove text-[10vw] text-amber-600/50 font-bold uppercase"
+        >
+          Agilidade
+        </h1>
       </div>
       <div
-        class="secao-horizontal flex h-full w-screen items-center justify-center border-r border-white/10 bg-emerald-950"
+        class="secao-horizontal flex h-full w-screen items-center justify-center border-r bg-amber-600/35 border-white/10"
       >
-        <h1 class="font-ubermove text-[10vw] font-bold uppercase">
+        <h1 class="font-ubermove text-[10vw] text-amber-600/50 font-bold uppercase">
           Modernidade
         </h1>
       </div>
       <div
-        class="secao-horizontal flex h-full w-screen items-center justify-center bg-zinc-900"
+        class="secao-horizontal flex h-full w-screen items-center justify-center bg-black/97"
       >
-        <h1 class="font-ubermove text-[10vw] font-bold uppercase">Inovação</h1>
+        <h1
+          class="font-ubermove text-[10vw] text-amber-600/50 font-bold uppercase"
+        >
+          Inovação
+        </h1>
       </div>
     </section>
 
-    <section class="bg-black px-8 py-30 text-white lg:px-20">
+    <section id="projetos" class="projects-section">
       <div
         class="mb-20 flex flex-col py-15 items-end justify-between gap-8 md:flex-row"
       >
-        <h2 class="font-ubermove-bold text-5xl tracking-tighter uppercase">
+        <h2
+          class="font-ubermove-bold text-5xl text-amber-600 tracking-tighter uppercase"
+        >
           Selected <br />
           <span class="text-zinc-600">Works</span>
         </h2>
@@ -241,56 +263,60 @@ onUnmounted(() => {
         </p>
       </div>
 
-      <div class="grid grid-cols-1 gap-20 lg:grid-cols-3">
-        <div
-          v-for="(project, idx) in projects"
-          :key="idx"
-          class="group cursor-pointer"
-        >
-          <div
-            class="relative aspect-[3/4] overflow-hidden rounded-xl bg-zinc-900"
-          >
+      <div class="projects-grid">
+        <div v-for="(project, idx) in projects" :key="idx" class="project-card">
+          <div class="project-img-wrap">
             <img
               :src="project.image"
-              class="h-full w-full object-cover opacity-50 grayscale transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
+              :alt="project.title"
+              class="project-img"
             />
-            <div
-              class="absolute top-6 right-6 rounded-full border border-white/20 bg-black/20 p-4 opacity-0 backdrop-blur-md transition-opacity group-hover:opacity-100"
-            >
-              <ArrowUpRight class="h-6 w-6" />
-            </div>
+            <!-- <div class="project-overlay">
+              <span class="overlay-cta">Ver projeto <ArrowUpRight :size="16" /></span>
+            </div> -->
           </div>
-          <div class="mt-8 flex items-start justify-between">
-            <div>
-              <p
-                class="mb-2 text-[10px] font-bold tracking-widest text-emerald-500 uppercase"
-              >
-                {{ project.category }}
-              </p>
-              <h3 class="font-ubermove-bold text-3xl tracking-tighter">
-                {{ project.title }}
-              </h3>
+          <div class="project-info">
+            <div class="project-info-left">
+              <span class="project-index">{{ project.index }}</span>
+              <div>
+                <p class="project-cat">{{ project.category }}</p>
+                <h3 class="project-title">{{ project.title }}</h3>
+              </div>
             </div>
-            <span class="font-mono text-sm text-zinc-600">{{
-              project.year
-            }}</span>
+            <span class="project-year">{{ project.year }}</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="flex h-screen items-center justify-center bg-[#F9F9F7]">
+    <!-- <section class="flex h-screen items-center justify-center bg-[#F9F9F7]">
       <h2
         translate="no"
         class="font-ubermove text-[15vw] font-bold tracking-tighter text-black uppercase opacity-5"
       >
         developer
       </h2>
+    </section> -->
+
+    <section
+      class="flex h-[70vh] flex-col items-center justify-center bg-[#F9F9F7] px-6 text-center"
+    >
+      <h2
+        class="font-ubermove-bold text-[10vw] leading-none tracking-tighter uppercase mb-12"
+      >
+        Vamos criar <br /><span class="outline-text">algo novo?</span>
+      </h2>
+      <a
+        href="mailto:contato@exemplo.com"
+        class="text-2xl font-ubermove-bold underline underline-offset-8 hover:text-emerald-600 transition-colors"
+      >
+        Get in touch
+      </a>
     </section>
 
     <div
       v-if="isLoading"
-      class="loader-container fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black text-white"
+      class="loader-container h-full fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-black text-white"
     >
       <div class="text-center">
         <p
@@ -379,5 +405,185 @@ onUnmounted(() => {
   flex-shrink: 0;
   width: 100vw;
   height: 100vh;
+}
+
+.outline-text {
+  -webkit-text-stroke: 1.5px black;
+  color: transparent;
+}
+
+.outline-text-white {
+  -webkit-text-stroke: 1px white;
+  color: transparent;
+}
+
+/* ══════════════════════════════════
+   PROJETOS
+══════════════════════════════════ */
+.projects-section {
+  background: var(--bg-2);
+  padding: 5rem 1.5rem 6rem;
+  border-top: 1px solid var(--border);
+}
+@media (min-width: 1024px) {
+  .projects-section {
+    padding: 7rem 5rem 8rem;
+  }
+}
+
+.projects-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 768px) {
+  .projects-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0;
+}
+.title-muted {
+  color: #2a2a2a;
+}
+.projects-header-desc {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--muted);
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .projects-header-desc {
+    text-align: right;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.project-card {
+  cursor: pointer;
+}
+.project-img-wrap {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--surface);
+  margin-bottom: 1.25rem;
+}
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(60%);
+  transition:
+    filter 0.6s ease,
+    transform 0.6s ease;
+}
+.project-card:hover .project-img {
+  filter: grayscale(0%);
+  transform: scale(1.04);
+}
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.project-card:hover .project-overlay {
+  opacity: 1;
+}
+.overlay-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.project-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.project-info-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.project-index {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  padding-top: 0.2rem;
+}
+.project-cat {
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.3rem;
+}
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: oklch(66.6% 0.179 58.318);
+}
+.project-year {
+  font-size: 0.65rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  font-family: 'Courier New', monospace;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: grayscale(30%) contrast(1.05);
+  transform: scale(1.05);
 }
 </style>
