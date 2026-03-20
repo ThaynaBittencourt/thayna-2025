@@ -8,6 +8,7 @@ import {
   Mail,
   ArrowUpRight,
   ExternalLink,
+  Instagram,
 } from "lucide-vue-next";
 import { onMounted, onUnmounted, ref, nextTick } from "vue";
 
@@ -25,28 +26,39 @@ const isMobile = ref(false);
 // ─── Projetos ────────────────────────────────────────────────────
 const projects = [
   {
-    title: "INTEGRAÇÃO COM IA",
-    category: "Inteligência Artificial",
+    title: "JáBusca",
+    category: "Marketplace",
     year: "2026",
     index: "01",
-    image:
-      "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=1000&auto=format&fit=crop",
+    image: new URL("../assets/img/JaBusca.png", import.meta.url).href,
   },
   {
-    title: "AUTOMAÇÃO",
-    category: "Workflow / n8n",
+    title: "Detran-PB",
+    category: "Novo sistema detran da Paraíba",
     year: "2026",
     index: "02",
-    image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop",
+    image: new URL("../assets/img/detranPb.png", import.meta.url).href,
   },
   {
-    title: "MEUS PROJETOS",
-    category: "Vamos criar juntos?",
+    title: "SIGA",
+    category: "Tela de Serviços do siga/IDEMA",
+    year: "2026",
+    index: "02",
+    image: new URL("../assets/img/idema.png", import.meta.url).href,
+  },
+  {
+    title: "Docbuilder",
+    category: "Sistema gerador de documentos com iA",
     year: "2025",
     index: "03",
-    image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1000&auto=format&fit=crop",
+    image: new URL("../assets/img/Docbuilder.png", import.meta.url).href,
+  },
+  {
+    title: "POSTO+",
+    category: "Sistema Marketplace para Ubers & etc.",
+    year: "2025",
+    index: "03",
+    image: new URL("../assets/img/posto+.png", import.meta.url).href,
   },
 ];
 
@@ -346,7 +358,7 @@ onUnmounted(() => {
     </div>
 
     <!-- Navbar -->
-    <nav class="site-nav">
+    <!-- <nav class="site-nav">
       <div class="nav-logo">TB<span class="nav-dot">.</span></div>
       <div class="nav-links">
         <a href="#hero" class="nav-link">Início</a>
@@ -356,7 +368,7 @@ onUnmounted(() => {
       <a href="mailto:contato@exemplo.com" class="nav-cta">
         Hire me <ArrowUpRight :size="13" />
       </a>
-    </nav>
+    </nav> -->
 
     <!-- ══════════════════════════════
          HERO  (fundo âmbar)
@@ -365,12 +377,42 @@ onUnmounted(() => {
       <div class="it-grid"></div>
 
       <!-- Plantas decorativas -->
-      <img src="../assets/img/planta.png" class="it-leaf it-leaf-bl" alt="" />
-      <img src="../assets/img/planta2.png" class="it-leaf it-leaf-tr" alt="" />
-      <img src="../assets/img/planta.png" class="it-leaf it-leaf-tr2" alt="" />
-      <img src="../assets/img/planta2.png" class="it-leaf it-leaf-br" alt="" />
-      <img src="../assets/img/planta3.png" class="it-leaf it-leaf-bm" alt="" />
-      <img src="../assets/img/planta3.png" class="it-leaf it-leaf-tm" alt="" />
+      <img
+        src="../assets/img/planta.png"
+        alt="Planta bottom L"
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -bottom-8 -left-8 rotate-45"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta2.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -top-8 -right-8 -rotate-[130deg]"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta.png"
+        alt="Planta top L"
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl bottom-[83%] -left-6 rotate-[130deg]"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta2.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl top-[35%] -right-8 -rotate-[35deg]"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta3.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -bottom-2 right-[20%]"
+        style="width: clamp(40px, 5vw, 110px)"
+      />
+      <img
+        src="../assets/img/planta3.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -top-2 left-[20%] rotate-180"
+        style="width: clamp(40px, 5vw, 110px)"
+      />
 
       <div class="hero-grid">
         <!-- Texto -->
@@ -379,8 +421,12 @@ onUnmounted(() => {
             <span class="dot"></span> Based in Natal, RN · Full Stack Developer
           </div>
           <h1 class="hero-heading">
-            <span class="hero-line hero-name-1">Thaynã</span>
-            <span class="hero-line hero-name-2">Bittencourt</span>
+            <span class="hero-line hero-name-1 font-ubermove-bold text-gray-800"
+              >Thaynã</span
+            >
+            <span class="hero-line hero-name-2 font-ubermove-bold text-gray-900"
+              >Bittencourt</span
+            >
           </h1>
           <p class="hero-desc hero-line">
             Desenvolvedor Full Stack especializado em
@@ -487,9 +533,9 @@ onUnmounted(() => {
     <section id="projetos" class="projects-section">
       <div class="projects-header">
         <div>
-          <span class="section-label">/ 02 — Trabalhos</span>
+          <span class="section-label"></span>
           <h2 class="section-title">
-            Selected<br /><span class="title-muted">Works</span>
+            Projetos<br /><span class="title-muted">Desenvolvido</span>
           </h2>
         </div>
         <p class="projects-header-desc">
@@ -503,7 +549,7 @@ onUnmounted(() => {
           v-for="(project, idx) in projects"
           :key="idx"
           class="project-card"
-          @mouseenter="showCursorLabel('Ver')"
+          @mouseenter="showCursorLabel('works')"
           @mouseleave="hideCursorLabel()"
         >
           <div class="project-img-wrap">
@@ -513,9 +559,9 @@ onUnmounted(() => {
               class="project-img"
             />
             <div class="project-overlay">
-              <span class="overlay-cta"
-                >Ver projeto <ExternalLink :size="13"
-              /></span>
+              <!-- <span class="overlay-cta"
+              >Ver projeto <ExternalLink :size="13"
+              /></span> -->
             </div>
           </div>
           <div class="project-info">
@@ -535,19 +581,40 @@ onUnmounted(() => {
     <!-- ══════════════════════════════
          CTA + PÁSSAROS  (fundo âmbar)
     ══════════════════════════════ -->
-    <section
-      id="contato"
-      class="cta-section-wrap"
-      ref="trailerRef2"
-      @mousemove="onTrailerMouseMove"
-    >
+    <section id="contato" class="cta-section-wrap" ref="trailerRef2">
       <div class="it-grid"></div>
 
       <!-- Plantas -->
-      <img src="../assets/img/planta.png" class="it-leaf it-leaf-bl" alt="" />
-      <img src="../assets/img/planta2.png" class="it-leaf it-leaf-tr" alt="" />
-      <img src="../assets/img/planta3.png" class="it-leaf it-leaf-bm" alt="" />
-      <img src="../assets/img/planta3.png" class="it-leaf it-leaf-tm" alt="" />
+      <img
+        src="../assets/img/planta.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -bottom-6 -left-8 rotate-45"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -top-7 -left-8 rotate-140"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta2.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -top-8 -right-8 -rotate-[130deg]"
+        style="width: clamp(80px, 12vw, 230px)"
+      />
+      <img
+        src="../assets/img/planta3.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -bottom-2 right-[20%]"
+        style="width: clamp(40px, 5vw, 110px)"
+      />
+      <img
+        src="../assets/img/planta3.png"
+        alt=""
+        class="absolute pointer-events-none object-contain z-[2] drop-shadow-xl -top-2 left-[20%] rotate-180"
+        style="width: clamp(40px, 5vw, 110px)"
+      />
 
       <!-- Pássaros autônomos -->
       <img
@@ -564,7 +631,7 @@ onUnmounted(() => {
       />
 
       <!-- Tesoura cursor -->
-      <img
+      <!-- <img
         src="https://ahmedabdalalim.pages.dev/images/footer/cutA.gif"
         class="it-cursor-moving"
         :style="{
@@ -586,22 +653,28 @@ onUnmounted(() => {
           transform: `translate(-50%,-50%) rotate(${trailerCursorAngle}deg)`,
         }"
         alt=""
-      />
+      /> -->
 
       <!-- Conteúdo CTA -->
       <div class="cta-inner">
-        <span class="section-label cta-label">/ 03 — Contato</span>
+        <span class="section-label cta-label"></span>
         <h2 class="cta-title">
           Vamos criar<br /><span class="cta-outline">algo novo?</span>
         </h2>
-        <a href="mailto:contato@exemplo.com" class="cta-email">
-          contato@exemplo.com
+        <a
+          href="mailto:thaynabittencourt.ads@gmail.com?subject=Contato via Portfolio"
+          class="cta-email"
+        >
+          thaynabittencourt.ads@gmail.com
           <ArrowUpRight :size="20" class="cta-arrow" />
         </a>
         <div class="cta-socials">
           <a href="#" class="cta-social-link"><Github :size="16" /> GitHub</a>
           <a href="#" class="cta-social-link"
             ><Linkedin :size="16" /> LinkedIn</a
+          >
+          <a href="#" class="cta-social-link"
+            ><Instagram :size="16" /> Instagram</a
           >
         </div>
       </div>
@@ -611,7 +684,7 @@ onUnmounted(() => {
     <!-- Footer -->
     <footer class="site-footer">
       <span>© 2026 Thaynã Bittencourt</span>
-      <span>Full Stack Developer · Natal, RN</span>
+      <!-- <span>Full Stack Developer · Natal, RN</span> -->
     </footer>
   </div>
 </template>
@@ -647,6 +720,15 @@ onUnmounted(() => {
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+.font-ubermove {
+  font-family: "UberMove", sans-serif;
+  font-weight: 400;
+}
+.font-ubermove-bold {
+  font-family: "UberMove", sans-serif;
+  font-weight: 700;
 }
 
 .portfolio-root {
@@ -841,7 +923,7 @@ onUnmounted(() => {
   z-index: 0;
 }
 
-.it-leaf {
+/* .it-leaf {
   position: absolute;
   pointer-events: none;
   object-fit: contain;
@@ -883,7 +965,7 @@ onUnmounted(() => {
   top: -0.5rem;
   left: 20%;
   transform: rotate(-180deg);
-}
+} */
 
 .it-bird {
   position: absolute;
@@ -996,14 +1078,12 @@ onUnmounted(() => {
 }
 .hero-name-1 {
   font-size: clamp(3.5rem, 9vw, 7.5rem);
-  color: #1a1a1a;
-  opacity: 0;
+
   transform: translateY(40px);
 }
 .hero-name-2 {
   font-size: clamp(2.8rem, 7.5vw, 6.5rem);
-  color: rgba(0, 0, 0, 0.72);
-  opacity: 0;
+
   transform: translateY(40px);
 }
 
@@ -1132,7 +1212,7 @@ onUnmounted(() => {
 }
 .hero-img-bg {
   position: absolute;
-  inset: 16px -16px -16px 16px;
+  inset: 16px 175px -35px 18px;
   background: rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   z-index: -1;
@@ -1247,15 +1327,19 @@ onUnmounted(() => {
   overflow: hidden;
 }
 .s1 {
-  background: #080808;
+  background: #000000;
+  border-left: 1px solid var(--c-surface);
+  border-right: 1px solid var(--c-surface);
 }
 .s2 {
-  background: #0e0e0e;
+  background: #111111;
   border-left: 1px solid var(--c-border);
   border-right: 1px solid var(--c-border);
 }
 .s3 {
-  background: #080808;
+  background: #000000;
+  border-left: 1px solid var(--c-surface);
+  border-right: 1px solid var(--c-border);
 }
 .word-wrap {
   position: relative;
@@ -1279,11 +1363,11 @@ onUnmounted(() => {
 }
 .word-solid {
   color: var(--c-text);
-  opacity: 0.08;
+  opacity: 0.18;
 }
 .s2 .word-solid {
   color: var(--c-accent);
-  opacity: 0.15;
+  opacity: 0.18;
 }
 
 /* ══════════════════════════════════════
@@ -1368,11 +1452,15 @@ onUnmounted(() => {
 }
 .project-img-wrap {
   position: relative;
-  aspect-ratio: 3/4;
+  aspect-ratio: 16 / 10; /* aspect-ratio: 3/4; (para formato alto)*/
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 12px;
   background: var(--c-surface);
-  margin-bottom: 1.4rem;
+  background-color: #f0f0f0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .project-img {
   width: 100%;
@@ -1557,7 +1645,7 @@ onUnmounted(() => {
 .site-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 1.5rem 2.5rem;
   border-top: 1px solid var(--c-border);
   font-size: 0.65rem;
