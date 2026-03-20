@@ -674,10 +674,10 @@ onUnmounted(() => {
         </a>
         <div class="cta-socials">
           <a href="#" class="cta-social-link"><Github :size="16" /> GitHub</a>
-          <a href="#" class="cta-social-link"
+          <a href="https://www.linkedin.com/in/thayn%C3%A3-bittencourt-470571274/" class="cta-social-link"
             ><Linkedin :size="16" /> LinkedIn</a
           >
-          <a href="#" class="cta-social-link"
+          <a href="https://www.instagram.com/negrescooficial/" class="cta-social-link"
             ><Instagram :size="16" /> Instagram</a
           >
         </div>
