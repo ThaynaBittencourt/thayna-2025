@@ -358,17 +358,21 @@ onUnmounted(() => {
     </div>
 
     <!-- Navbar -->
-    <!-- <nav class="site-nav">
+    <nav class="site-nav">
       <div class="nav-logo">TB<span class="nav-dot">.</span></div>
       <div class="nav-links">
         <a href="#hero" class="nav-link">Início</a>
         <a href="#projetos" class="nav-link">Projetos</a>
         <a href="#contato" class="nav-link">Contato</a>
       </div>
-      <a href="mailto:contato@exemplo.com" class="nav-cta">
-        Hire me <ArrowUpRight :size="13" />
+      <a
+        href="https://wa.me/5584996839198?text=Olá%20Thaynã%2C%20vim%20pelo%20seu%20portfolio!"
+        target="_blank"
+        class="nav-cta"
+      >
+        Whats <ArrowUpRight :size="13" />
       </a>
-    </nav> -->
+    </nav>
 
     <!-- ══════════════════════════════
          HERO  (fundo âmbar)
@@ -417,17 +421,17 @@ onUnmounted(() => {
       <div class="hero-grid">
         <!-- Texto -->
         <div class="hero-text">
-          <div class="hero-tag hero-line">
-            <span class="dot"></span> Based in Natal, RN · Full Stack Developer
-          </div>
           <h1 class="hero-heading">
             <span class="hero-line hero-name-1 font-ubermove-bold text-gray-800"
-              >Thaynã</span
+            >Thaynã</span
             >
             <span class="hero-line hero-name-2 font-ubermove-bold text-gray-900"
-              >Bittencourt</span
+            >Bittencourt</span
             >
           </h1>
+          <div class="hero-tag hero-line">
+            <span class="dot"></span> Residente em Natal, RN · Desenvolvedor Full Stack
+          </div>
           <p class="hero-desc hero-line">
             Desenvolvedor Full Stack especializado em
             <em>Laravel</em>, <em>Vue.js</em> e automações com <em>n8n</em>.
@@ -842,6 +846,7 @@ onUnmounted(() => {
    NAVBAR
 ══════════════════════════════════════ */
 .site-nav {
+  background-color: #000000;
   position: fixed;
   top: 0;
   left: 0;
@@ -850,7 +855,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.4rem 2.5rem;
+  padding: 1rem 3.5rem;
   opacity: 0;
   transform: translateY(-20px);
   transition:
